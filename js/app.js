@@ -38,7 +38,9 @@ let currentBlockGrid = null;
 let currentUsedPalette = null;
 
 // ── Drag & Drop ─────────────────────────────────────────────
-dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('click', (e) => {
+  if (e.target !== fileInput) fileInput.click();
+});
 
 dropZone.addEventListener('dragover', (e) => {
   e.preventDefault();
@@ -178,18 +180,15 @@ function loadImage(file) {
 
       // Update drop zone
       dropZone.classList.add('has-image');
-      dropZone.innerHTML = `
-        <div class="upload__label">✓ <strong>${file.name}</strong></div>
-        <div class="upload__hint">Нажмите чтобы заменить</div>
-        <input type="file" id="fileInput" accept="image/*">
-      `;
+      
+      const icon = dropZone.querySelector('.upload__icon');
+      if (icon) icon.style.display = 'none';
 
-      const newInput = dropZone.querySelector('input[type="file"]');
-      dropZone.onclick = () => newInput.click();
-      newInput.addEventListener('change', (ev) => {
-        const f = ev.target.files[0];
-        if (f) loadImage(f);
-      });
+      const label = dropZone.querySelector('.upload__label');
+      if (label) label.innerHTML = `✓ <strong>${file.name}</strong>`;
+
+      const hint = dropZone.querySelector('.upload__hint');
+      if (hint) hint.textContent = 'Нажмите чтобы заменить';
 
       // Show original
       originalPreview.src = e.target.result;
