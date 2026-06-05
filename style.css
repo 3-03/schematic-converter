@@ -135,12 +135,36 @@ body {
   padding: 48px 0 36px;
 }
 
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.header__logo {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  padding: 6px;
+  filter: invert(1);
+  mix-blend-mode: screen;
+  object-fit: contain;
+}
+
+.header__brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
 .header__eyebrow {
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--tint);
   letter-spacing: 0.04em;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 .header__title {
