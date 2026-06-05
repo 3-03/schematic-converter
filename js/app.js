@@ -146,8 +146,9 @@ function showBlockTip(e) {
     const block = BLOCK_PALETTE[idx];
     const [r, g, b] = block.rgb;
     const name = block.id.replace('minecraft:', '').replaceAll('_', ' ');
+    const textureFile = getTextureFilename(block.id);
     blockTip.innerHTML = `
-      <span class="block-tip__swatch" style="background:rgb(${r},${g},${b})"></span>
+      <span class="block-tip__swatch" style="background-color:rgb(${r},${g},${b}); background-image:url('textures/${textureFile}')"></span>
       <span class="block-tip__name"><strong>${name}</strong> (${bx}, ${bz})</span>
     `;
   }
@@ -258,11 +259,12 @@ function buildMaterialList() {
     const block = BLOCK_PALETTE[idx];
     const [r, g, b] = block.rgb;
     const name = block.id.replace('minecraft:', '').replaceAll('_', ' ');
+    const textureFile = getTextureFilename(block.id);
 
     const row = document.createElement('div');
     row.className = 'mat-row';
     row.innerHTML = `
-      <span class="mat-row__swatch" style="background:rgb(${r},${g},${b})"></span>
+      <span class="mat-row__swatch" style="background-color:rgb(${r},${g},${b}); background-image:url('textures/${textureFile}')"></span>
       <span class="mat-row__name">${name}</span>
       <span class="mat-row__count">×${count}</span>
     `;
@@ -270,6 +272,18 @@ function buildMaterialList() {
   }
 
   matList.classList.add('visible');
+}
+
+// ── Helpers ──────────────────────────────────────────────────
+function getTextureFilename(blockId) {
+  const name = blockId.replace('minecraft:', '');
+  if (name === 'snow_block') return 'snow.png';
+  if (name === 'bone_block') return 'bone_block_top.png';
+  if (name === 'quartz_block') return 'quartz_block_top.png';
+  if (name === 'hay_block') return 'hay_block_top.png';
+  if (name === 'dried_kelp_block') return 'dried_kelp_top.png';
+  if (name.endsWith('froglight')) return `${name}_top.png`;
+  return `${name}.png`;
 }
 
 // ── Toast ───────────────────────────────────────────────────

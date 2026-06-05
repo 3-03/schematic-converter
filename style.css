@@ -488,6 +488,9 @@ body {
   border-radius: 3px;
   border: 1px solid rgba(255,255,255,0.12);
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  image-rendering: pixelated;
 }
 
 .block-tip__name {
@@ -570,6 +573,9 @@ body {
   border-radius: 4px;
   border: 1px solid rgba(255,255,255,0.08);
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  image-rendering: pixelated;
 }
 
 .mat-row__name {
